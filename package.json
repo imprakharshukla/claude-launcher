@@ -1,0 +1,26 @@
+{
+  "name": "claude-launcher",
+  "version": "1.0.0",
+  "type": "module",
+  "bin": {
+    "c": "./bin/c.js"
+  },
+  "scripts": {
+    "dev": "tsx src/index.tsx",
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "ink": "^5.0.1",
+    "ink-text-input": "^6.0.0",
+    "react": "^18.3.1",
+    "@leeoniya/ufuzzy": "^1.0.14",
+    "chokidar": "^3.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/react": "^18.3.0",
+    "typescript": "^5.7.0",
+    "tsx": "^4.19.0"
+  }
+}
