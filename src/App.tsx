@@ -117,8 +117,11 @@ export const App: React.FC = () => {
       }
     }
 
-    // 'g' to open directly in Ghostty (no tmux)
-    if (input === 'g' && selectedSession && !key.ctrl && !key.meta) {
+    // These shortcuts only work when search is empty (to avoid conflicts with typing)
+    const searchEmpty = !query.trim()
+
+    // 'g' to open directly in Ghostty (no tmux) - only when search empty
+    if (input === 'g' && selectedSession && searchEmpty && !key.ctrl && !key.meta) {
       try {
         log('Opening in Ghostty directly', { sessionId: selectedSession.id })
         launchResumeDirectGhostty(selectedSession.id, selectedSession.project)
@@ -126,10 +129,11 @@ export const App: React.FC = () => {
       } catch (e) {
         setLaunchError(e instanceof Error ? e.message : String(e))
       }
+      return
     }
 
-    // 's' to save/bookmark (or 'S' to remove bookmark)
-    if (input === 's' && selectedSession && !key.ctrl && !key.meta) {
+    // 'b' to save/bookmark - only when search empty
+    if (input === 'b' && selectedSession && searchEmpty && !key.ctrl && !key.meta) {
       // Enter bookmark mode with default name
       const defaultName = selectedSession.projectName + ': ' +
         selectedSession.lastMessage.replace(/\s+/g, ' ').trim().slice(0, 30)
@@ -138,8 +142,8 @@ export const App: React.FC = () => {
       return
     }
 
-    // 'x' to remove bookmark
-    if (input === 'x' && selectedSession && selectedBookmark && !key.ctrl && !key.meta) {
+    // 'd' to remove bookmark (delete) - only when search empty
+    if (input === 'd' && selectedSession && selectedBookmark && searchEmpty && !key.ctrl && !key.meta) {
       removeBookmark(selectedSession.id)
       setBookmarks(loadBookmarks())
       log('Bookmark removed', { sessionId: selectedSession.id })

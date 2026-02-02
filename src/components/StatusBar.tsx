@@ -22,10 +22,14 @@ export const StatusBar: React.FC<Props> = ({ totalSessions, filteredCount, hasQu
       </Box>
       <Box marginTop={1}>
         <Text color="gray">
-          <Text color="white">⏎</Text> resume
-          <Text color="yellow">g</Text> ghostty
-          <Text color="yellow">s</Text> save
-          <Text color="white">x</Text> unsave
+          <Text color="white">⏎</Text> open
+          {!hasQuery && (
+            <>
+              <Text color="yellow">g</Text> ghostty
+              <Text color="yellow">b</Text> bookmark
+              <Text color="white">d</Text> unbookmark
+            </>
+          )}
           <Text color="white">^F</Text> fork
           <Text color="white">esc</Text> {hasQuery ? 'clear' : 'quit'}
         </Text>
